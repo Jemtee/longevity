@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 203 89% 53%;
+  --secondary: 18 23% 66%;
+  --success: 142 71% 45%;
+  --warning: 38 92% 50%;
+  --error: 4 90% 58%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+}
