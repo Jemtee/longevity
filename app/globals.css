@@ -2,18 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary: 203 89% 53%;
-  --secondary: 18 23% 66%;
-  --success: 142 71% 45%;
-  --warning: 38 92% 50%;
-  --error: 4 90% 58%;
+@layer base {
+  :root {
+    /* Wellspring Brand Colors */
+    --primary: 203 89% 53%;
+    --secondary: 18 23% 66%;
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --error: 4 90% 58%;
+
+    /* Shadcn/ui Variables */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary-foreground: 210 40% 98%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 203 89% 53%;
+    --radius: 0.75rem;
+    --chart-1: 203 89% 53%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 18 23% 66%;
+    --chart-5: 4 90% 58%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 203 89% 53%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 203 89% 53%;
+    --chart-1: 203 89% 53%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 18 23% 66%;
+    --chart-5: 4 90% 58%;
+  }
 }
 
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cal Sans', system-ui, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cal Sans', system-ui, sans-serif;
+  }
 }
