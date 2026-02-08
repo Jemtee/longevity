@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
+import { LayoutDashboard, Droplet, Lightbulb, Target, BookOpen } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 
 interface DashboardNavProps {
@@ -25,11 +26,11 @@ export default function DashboardNav({ user }: DashboardNavProps) {
   }
 
   const navItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: '📊' },
-    { name: 'Biomarkers', href: '/biomarkers', icon: '🔬' },
-    { name: 'Insights', href: '/insights', icon: '💡' },
-    { name: 'Goals', href: '/goals', icon: '🎯' },
-    { name: 'Content', href: '/content', icon: '📚' },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { name: 'Biomarkers', href: '/dashboard/biomarkers', icon: Droplet },
+    { name: 'Insights', href: '/dashboard/insights', icon: Lightbulb },
+    { name: 'Goals', href: '/dashboard/goals', icon: Target },
+    { name: 'Content', href: '/dashboard/content', icon: BookOpen },
   ]
 
   return (
@@ -47,17 +48,18 @@ export default function DashboardNav({ user }: DashboardNavProps) {
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
+              const Icon = item.icon
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-primary-100 text-primary-700'
                       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                   }`}
                 >
-                  <span className="mr-2">{item.icon}</span>
+                  <Icon className="w-4 h-4" />
                   {item.name}
                 </Link>
               )
@@ -85,17 +87,18 @@ export default function DashboardNav({ user }: DashboardNavProps) {
           <div className="flex flex-wrap gap-2">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
+              const Icon = item.icon
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-primary-100 text-primary-700'
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
                 >
-                  <span className="mr-1">{item.icon}</span>
+                  <Icon className="w-4 h-4" />
                   {item.name}
                 </Link>
               )
