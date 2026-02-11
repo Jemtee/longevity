@@ -176,3 +176,91 @@ This places the component in `components/ui/` with project-consistent styling.
 - **Server Components / API Routes:** `import { createClient } from '@/lib/supabase/server'` (async)
 - **Client Components:** `import { createClient } from '@/lib/supabase/client'` (sync)
 - **Admin operations (bypasses RLS):** `import { createAdminClient } from '@/lib/supabase/server'`
+
+---
+
+## Health Domain Knowledge
+
+> Full reference: [`project-fundamentals/health-domain-knowledge.md`](project-fundamentals/health-domain-knowledge.md)
+
+This section summarizes the health domain rules that govern all AI-generated content, insights, recommendations, and nudging logic in Wellspring. The full document contains detailed biomarker tables, citations, gut microbiome science, supplement protocols, and expansion paths.
+
+### Evidence Grading (Mandatory)
+
+Every recommendation the app surfaces must carry a grade:
+
+| Grade | Label | Criteria | UI treatment |
+|-------|-------|----------|-------------|
+| **A** | Strong | >=2 large RCTs or meta-analyses in top-tier journals | Confident recommendation |
+| **B** | Moderate | >=2 cohort studies or 1 well-designed RCT | Standard recommendation with brief caveat |
+| **C** | Preliminary | 1 study, small sample, or animal/in-vitro only | "Emerging evidence" label + caveat |
+| **D** | Expert opinion | Mechanistic reasoning or clinical consensus, no direct study | "Expert perspective" + disclaimer |
+
+- Never present Grade C/D findings as established fact.
+- Always cite: first author, journal, year.
+- Include health disclaimer on every insight.
+- Prefer Nordic/European reference ranges.
+
+### Biomarker Categories (8 Total)
+
+The app currently seeds 7 categories with 30 biomarkers. A proposed 8th category — **Gut Health** — adds microbiome and digestive markers:
+
+1. **Metabolic** — HbA1c, fasting glucose, fasting insulin (expand: HOMA-IR)
+2. **Cardiovascular** — LDL, HDL, triglycerides, ApoB (expand: Lp(a))
+3. **Inflammation** — hs-CRP, homocysteine (expand: fibrinogen, IL-6)
+4. **Hormones** — TSH, T3/T4, testosterone, estradiol, cortisol (expand: DHEA-S, IGF-1)
+5. **Vitamins & Minerals** — Vitamin D, B12, folate, magnesium, iron, ferritin (expand: omega-3 index, zinc)
+6. **Kidney & Liver** — creatinine, eGFR, ALT, AST (expand: GGT, cystatin C, albumin)
+7. **Physical Performance** — VO2max, body fat %, resting HR, HRV (expand: grip strength, waist circumference, lean mass)
+8. **Gut Health** *(proposed)* — fecal calprotectin, microbiome diversity, zonulin, secretory IgA, SCFAs
+
+### Gut Microbiome — Key Principles
+
+The gut microbiome connects to nearly every other biomarker category:
+
+- **Low diversity + high hs-CRP** → systemic inflammation from dysbiosis (Grade A)
+- **Low butyrate producers + high insulin** → impaired gut barrier → insulin resistance (Grade B)
+- **High TMAO + high ApoB** → gut-derived cardiovascular risk (Grade B)
+- **Low Akkermansia + high HbA1c** → metabolic endotoxemia (Grade B)
+
+Probiotics: only recommend strains with human RCT evidence (see full reference for strain-specific table). Nordic-relevant: *L. reuteri* (BioGaia, Swedish), *L. plantarum 299v* (Probi, Swedish), BB-12 (common in Nordic dairy).
+
+Prebiotics: high-fiber diet (>30g/day, Grade A), resistant starch, inulin/FOS, polyphenols.
+
+Fermented foods: the Stanford study (Wastyk et al., Cell, 2021) showed 6 weeks of high-fermented food intake increased microbiome diversity and decreased inflammation (Grade B).
+
+### Nudging Strategy — Expanding Tracking Over Lifetime
+
+Nudges are goal-anchored, evidence-driven, and non-intrusive:
+
+- **Trigger:** User has >=2 data points for an existing marker (shows engagement).
+- **Frequency:** Max 1 nudge/week.
+- **Tone:** Educational — explain *why* the new marker matters.
+- **Seasonal:** Vitamin D in September (Nordics), metabolic reset in spring, fitness check in summer.
+
+Example expansion paths (see full reference for all 6 goal paths):
+
+```
+Goal: "Heart health"
+  Lipid panel → ApoB → hs-CRP → Lp(a) → Homocysteine → VO2max → Gut Health
+
+Goal: "Gut health"
+  Calprotectin → Diversity → sIgA → hs-CRP → SCFAs → Ferritin + B12 → Full metabolic
+```
+
+Milestone unlocks: 2 readings = trend arrow, 5+ markers = cross-correlations, 12 months = annual report, gut + blood panel = gut-systemic connections.
+
+### Exercise & Nutrition Rules
+
+- **Exercise:** 150 min/week moderate cardio + 2x/week resistance training are Grade A for longevity. VO2max is the single strongest mortality predictor (Mandsager et al., 2018).
+- **Nutrition:** Mediterranean diet is the only Grade A dietary pattern for CVD and mortality reduction (PREDIMED trial). High fiber (>30g/day) is Grade A for microbiome and metabolic health.
+- **Supplements:** Food-first approach. Only recommend supplements for documented deficiencies with Grade A/B evidence. Always include dosing, duration-to-retest, and interaction warnings.
+
+### Supplement Guidance
+
+- Vitamin D <50 nmol/L → 2000–4000 IU/day D3 (Grade A; standard Nordic recommendation)
+- B12 <200 pmol/L → 1000 µg/day (Grade A)
+- Ferritin <30 µg/L → iron bisglycinate 25-50 mg every other day (Grade A; better absorption than daily)
+- Homocysteine >12 µmol/L → methylfolate + B12 + B6 (Grade A)
+- Omega-3 Index <8% → 2-3g EPA+DHA/day (Grade A)
+- Low gut diversity → prebiotic fiber 5-15g/day, titrate slowly (Grade B)
