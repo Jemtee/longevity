@@ -543,6 +543,338 @@ Based on the health domain knowledge above, prioritized educational content:
 
 ---
 
-*Last updated: 2026-02-11*
+## 12. Environmental Health — PFAS, Cookware, Water & Toxin Exposure
+
+Environmental exposures affect many of the biomarkers Wellspring tracks. The AI health interview should assess these exposures and connect them to relevant blood markers.
+
+### 12.1 PFAS (Per- and Polyfluoroalkyl Substances) — "Forever Chemicals"
+
+PFAS are a family of >9,000 synthetic chemicals that resist degradation. They accumulate in the body (half-life: 2-8 years) and are detectable in the blood of >98% of the population (CDC NHANES data).
+
+#### Exposure sources
+
+| Source | PFAS type | Exposure risk | Avoidability |
+|--------|----------|---------------|-------------|
+| **Non-stick cookware (PTFE/Teflon)** | PFOA (legacy), GenX (replacement) | Moderate — off-gasses above 260°C; scratched pans leach more | High — switch cookware |
+| **Food packaging** | PFAS coatings on fast-food wrappers, microwave popcorn bags, pizza boxes | Moderate | Moderate — reduce takeout packaging |
+| **Drinking water** | PFOA, PFOS, other PFAS from industrial contamination | High in affected areas | High — use activated carbon or reverse osmosis filter |
+| **"Ceramic-coated" non-stick pans** | Some contain PTFE under ceramic branding | Low-moderate — depends on actual coating | Research brand; look for third-party PFAS-free certification |
+| **Stain-resistant textiles** | PFAS in outdoor clothing (Gore-Tex), carpets, upholstery | Low (dermal absorption limited) | Moderate |
+| **Dental floss** (some brands) | PTFE-based floss (e.g., Oral-B Glide) | Very low | High — switch to unwaxed or natural |
+| **Ski wax** | Fluorinated waxes | Low unless occupational | Nordic-relevant; EU ban on fluorinated ski wax effective 2025 |
+
+#### Health effects of PFAS — by biomarker
+
+| Health effect | Biomarker impact | Evidence | Key study | Grade |
+|--------------|-----------------|---------|-----------|-------|
+| **Thyroid disruption** | Elevated TSH, altered T3/T4 | Strong association in multiple epidemiological studies | Webster et al., Environ Health Perspect, 2014 | **A** |
+| **Cholesterol elevation** | Increased total cholesterol, LDL-C | C8 Health Project (69,000 people) found dose-response relationship | Frisbee et al., Environ Health Perspect, 2010 | **A** |
+| **Immune suppression** | Reduced vaccine antibody response; lower sIgA | Consistent across child and adult studies | Grandjean et al., JAMA, 2012 | **A** |
+| **Liver damage** | Elevated ALT, GGT | Dose-dependent ALT elevation in NHANES data | Gallo et al., Environ Health Perspect, 2012 | **B** |
+| **Metabolic disruption** | Elevated fasting insulin, HbA1c | PFAS associated with insulin resistance and diabetes risk | Sun et al., Environ Health Perspect, 2018 | **B** |
+| **Gut microbiome disruption** | Reduced diversity, altered Firmicutes/Bacteroidetes | Emerging research; animal + limited human data | Lai et al., Environ Int, 2022 | **C** |
+| **Kidney function** | Reduced eGFR, elevated uric acid | Epidemiological association | Shankar et al., J Am Soc Nephrol, 2011 | **B** |
+| **Reproductive hormones** | Altered testosterone, estradiol | Associated with reduced fertility in both sexes | Bach et al., Hum Reprod, 2016 | **B** |
+
+**AI interview logic:** If a user reports using non-stick cookware daily AND has unexplained elevated cholesterol or thyroid issues, the AI should flag PFAS exposure as a possible contributing factor (Grade A for cholesterol, Grade A for thyroid).
+
+#### PFAS blood testing
+
+- **PFAS blood panel** is available from some labs (not routine in Sweden). Measures PFOA, PFOS, PFHxS, PFNA.
+- Normal population range: PFOS 2-20 ng/mL, PFOA 1-10 ng/mL (declining since PFOA phase-out).
+- **Not yet recommended for routine screening** — add as a niche/premium marker for users with high-exposure profiles.
+- Swedish context: Ronneby PFAS contamination incident (2013) raised national awareness; some municipalities offer free testing.
+
+### 12.2 Cookware Safety Guide
+
+The AI interview should ask about cooking habits and recommend safer alternatives where appropriate.
+
+| Cookware type | Safety profile | What it leaches | Health concern | Recommendation | Grade |
+|--------------|---------------|-----------------|----------------|---------------|-------|
+| **PTFE (Teflon) non-stick** | Risky above 260°C; polymer fume fever if overheated; scratched surfaces leach PFAS | PFAS compounds | Thyroid, cholesterol, immune | Replace if scratched or used on high heat. Avoid for searing/wok cooking. | **A** (for PFAS effects) |
+| **Stainless steel (18/10)** | Very safe; small amount of nickel/chromium leaches, especially with acidic food | Trace Ni, Cr | Nickel allergy in sensitive individuals (<5% population) | Safe for general use. Avoid prolonged acidic cooking if nickel-sensitive. | **A** (safe) |
+| **Cast iron (uncoated)** | Safe; adds dietary iron (1-5 mg per serving with acidic foods) | Iron (Fe) | Beneficial for iron-deficient users; potentially harmful for iron-overload (hemochromatosis) | Good choice. Monitor ferritin if cooking acidic foods frequently AND ferritin is already high. | **B** |
+| **Enameled cast iron** (Le Creuset, Staub) | Very safe; enamel is inert glass coating | None significant | None (unless enamel is chipped — discard if so) | Excellent choice. Premium but safest heavy-duty option. | **A** (safe) |
+| **Carbon steel** | Similar to cast iron; develops non-stick seasoning with use | Trace iron | Same as cast iron — minimal | Good choice for high-heat cooking (wok, searing). | **B** (safe, extrapolated from cast iron data) |
+| **Ceramic (true stoneware)** | Safe if lead/cadmium-free | Possible lead/cadmium from low-quality glazes | Lead poisoning from imported/antique ceramics | Use EU/FDA-certified products only. Avoid handmade imports without certification. | **B** |
+| **"Ceramic-coated" non-stick** | Mixed — some are genuinely PFAS-free (e.g., GreenPan); others use PTFE underneath | Depends on actual coating | PFAS if mislabeled | Research brand specifically; look for third-party PFAS-free testing (SGS, TUV). | **C** (variable) |
+| **Glass (Pyrex, borosilicate)** | Inert; safest possible material | Nothing | None | Excellent for baking, oven use, storage. Not practical for stovetop. | **A** (safe) |
+| **Aluminum (uncoated)** | Reactive with acidic foods; leaches aluminum | Aluminum (Al) | Debated link to Alzheimer's (largely disproven but precautionary avoidance reasonable) | Avoid for acidic cooking (tomato sauce, citrus). Anodized aluminum is safer. | **C** (conflicting evidence) |
+| **Copper (unlined)** | Toxic if food contacts copper directly | Copper (Cu) | Copper toxicity (nausea, liver damage) | Only use if lined with stainless steel or tin. Unlined copper is decorative only. | **A** (toxic if unlined) |
+
+**Practical recommendation tiers (for the AI interview):**
+- **Best:** Stainless steel, enameled cast iron, glass
+- **Good:** Cast iron, carbon steel, certified PFAS-free ceramic-coated
+- **Caution:** PTFE non-stick (OK on low-medium heat if not scratched), uncoated aluminum
+- **Avoid:** Scratched non-stick, unlined copper, uncertified imported ceramics
+
+### 12.3 Water Quality & Filtration
+
+| Contaminant | Health impact | Biomarkers affected | Filtration method | Nordic context | Grade |
+|------------|-------------|--------------------|--------------------|---------------|-------|
+| **PFAS** | Thyroid, cholesterol, immune | TSH, LDL-C, sIgA | Activated carbon (reduces ~60-70%); reverse osmosis (>95% removal) | Contamination documented in Ronneby, Kallinge, Uppsala, Tullinge | **A** |
+| **Lead (Pb)** | Neurotoxicity, kidney damage, blood pressure | Blood pressure, eGFR, hemoglobin | Reverse osmosis; NSF-certified lead filters | Old buildings (pre-1970s plumbing) in Sweden; rare but test if old housing | **A** |
+| **Chlorine/chloramine** | Gut microbiome disruption (kills beneficial bacteria in drinking water) | Microbiome diversity | Activated carbon filter | Standard in Swedish municipal water | **C** (limited human gut data, plausible mechanism) |
+| **Microplastics** | Emerging concern; gut inflammation, endocrine disruption | Unknown (too early) | Reverse osmosis | Present in tap water globally | **C** |
+| **Nitrate** | Methemoglobinemia (infants); possible cancer link | Not directly tracked | Reverse osmosis; ion exchange | Private wells in agricultural areas (Sweden) | **B** |
+
+**AI interview question:** "What is your primary drinking water source? (Municipal tap / well / filtered / bottled)"
+
+### 12.4 Food Contact Materials & Storage
+
+| Material | Risk | Leaching compounds | When to avoid | Better alternative | Grade |
+|----------|------|--------------------|--------------|--------------------|-------|
+| **Plastic containers (PP #5)** | Low at room temp; higher when heated | BPA-free but may contain BPS, phthalates | Microwaving, hot food storage | Glass or stainless steel | **B** (for endocrine disruption from hot plastic) |
+| **Plastic wrap (PVC)** | Moderate when in contact with hot/fatty food | Phthalates (DEHP), adipates | Wrapping hot food, microwaving | Beeswax wraps, silicone lids | **B** |
+| **BPA-lined cans** | Moderate (declining — most now BPA-free) | Bisphenol A → endocrine disruption | Daily canned food consumption | BPA-free cans, glass jars, fresh/frozen food | **A** (BPA is well-studied endocrine disruptor: Rochester, Reprod Toxicol, 2013) |
+| **Silicone (food-grade)** | Low; stable up to 220°C | Trace siloxanes (minimal) | Non-food-grade silicone (craft-grade) | FDA/EU food-grade certified silicone | **C** |
+| **Stainless steel containers** | Very low | Negligible | None | Ideal for food storage and water bottles | **A** (safe) |
+| **Glass containers** | None (inert) | Nothing | Thermal shock (don't heat frozen glass) | Best for all food storage | **A** (safe) |
+
+**AI interview question:** "Do you typically store or reheat food in plastic containers?"
+
+**Biomarker connections:**
+- BPA exposure → elevated estradiol, disrupted testosterone (Grade A: Rochester, 2013)
+- Phthalate exposure → altered thyroid hormones, reduced testosterone (Grade A: Meeker et al., Environ Health Perspect, 2011)
+- If user reports extensive plastic use AND has unexplained hormonal disruption, flag environmental exposure as a contributing factor.
+
+### 12.5 Heavy Metals
+
+| Metal | Primary sources | Biomarkers affected | Testing | Actionability | Grade |
+|-------|----------------|--------------------|---------|--------------|----|
+| **Mercury (Hg)** | Large fish (tuna, swordfish), dental amalgam, some skin products | Neurological symptoms, thyroid (TSH), kidney (eGFR) | Blood or hair mercury test | Reduce large predatory fish; 2-3 servings/week of low-mercury fish is optimal (salmon, sardines, mackerel) | **A** (Karagas et al., Environ Health Perspect, 2012) |
+| **Lead (Pb)** | Old paint, old pipes, imported spices/ceramics, shooting ranges | Blood pressure, eGFR, hemoglobin, neurocognition | Blood lead level | Filter water; avoid imported ceramics for food; replace old pipes | **A** |
+| **Cadmium (Cd)** | Tobacco smoke, rice (grown in contaminated soil), cocoa, some vegetables | Kidney (eGFR, creatinine), bone density, ferritin | Blood or urine cadmium | Stop smoking; diversify grains (don't rely solely on rice) | **A** (Nawrot et al., Lancet Oncol, 2006) |
+| **Arsenic (As)** | Rice, well water, some seafood | Cancer risk, skin changes, metabolic (HbA1c) | Urine arsenic (speciated) | Rinse rice thoroughly; vary grains; test well water | **B** |
+
+**Nordic-specific note:** Mercury from Baltic Sea fish is a known concern. Swedish Livsmedelsverket recommends limiting certain Baltic fish species. Salmon from the Atlantic/Norwegian coast is generally lower in mercury.
+
+### 12.6 Environmental Exposure ↔ Biomarker Connection Map
+
+For the AI insight engine — when a user reports environmental exposures AND has anomalous biomarkers:
+
+| Exposure reported | Anomalous biomarker | Possible connection | AI should suggest |
+|-------------------|--------------------|--------------------|-------------------|
+| Daily non-stick cookware use | Elevated TSH or cholesterol | PFAS → thyroid/lipid disruption | Consider switching cookware; retest in 6 months |
+| Plastic food heating | Disrupted testosterone or estradiol | BPA/phthalates → endocrine disruption | Switch to glass/steel containers; retest hormones in 3 months |
+| Unfiltered tap water (known PFAS area) | Elevated LDL-C, altered sIgA | PFAS → cholesterol, immune effects | Install activated carbon filter; consider PFAS blood test |
+| High rice consumption (>7 servings/week) | Elevated HbA1c, declining eGFR | Arsenic → metabolic, kidney | Rinse rice; diversify with oats, potatoes, other grains |
+| Frequent large fish consumption | Elevated TSH, neurological symptoms | Mercury → thyroid, neurotoxicity | Switch to low-mercury fish species; test blood mercury |
+| Smoking or secondhand smoke exposure | Low eGFR, elevated hs-CRP, elevated ferritin | Cadmium + oxidative stress | Cessation is Grade A for all outcomes; no partial fix |
+| Old building (pre-1970s) | Elevated blood pressure, declining eGFR | Lead from old plumbing | Test water for lead; install certified lead filter |
+
+---
+
+## 13. AI Health Interview — Conversational Assessment Feature
+
+### 13.1 Feature Overview
+
+The AI Health Interview is a guided conversation where the AI asks the user structured questions about their health, nutrition, lifestyle, and environmental exposures. The conversation:
+
+- **Builds a complete health profile** that informs which biomarkers to recommend tracking
+- **Surfaces personalized, science-graded recommendations** based on answers
+- **Connects environmental exposures to specific biomarkers** the user should monitor
+- **Seeds the nudging system** with context for future expansion suggestions
+- **Can be revisited** — users can update their answers as habits change
+
+### 13.2 Interview Principles
+
+1. **Conversational, not clinical.** Friendly tone, one question at a time, explain why each question matters.
+2. **Every recommendation carries an evidence grade.** Never give ungraded advice.
+3. **Cite the science.** After each topical section, summarize findings with references.
+4. **Connect answers to biomarkers.** Each answer should map to specific markers the user might benefit from tracking.
+5. **Respect uncertainty.** If a user says "I don't know," that's fine — suggest a test rather than assuming.
+6. **No diagnosis.** Always frame as "your answers suggest it may be worth checking X" — never "you have Y."
+7. **Progressive depth.** Start broad, go deeper only where the user's answers indicate relevance.
+8. **Save state.** Store the interview profile so AI insights and nudges can reference it.
+
+### 13.3 Interview Sections & Question Framework
+
+#### Section 1: Goals & Motivation (2-3 questions)
+
+| # | Question | Why it matters | Maps to |
+|---|---------|---------------|---------|
+| 1.1 | "What's your main health goal right now? (e.g., more energy, heart health, gut health, longevity, fitness, weight management)" | Anchors the entire recommendation set; determines which biomarker expansion path to start | Nudge expansion path selection (Section 7.2) |
+| 1.2 | "Is there anything specific that prompted you to start tracking your health? (e.g., family history, a test result, a health scare, curiosity)" | Identifies urgency and context; family history triggers specific marker suggestions | Lp(a) if family CVD history; HbA1c if family diabetes |
+| 1.3 | "How would you describe your comfort level with health data? (beginner / intermediate / data enthusiast)" | Adjusts recommendation complexity and number of suggested markers | UI complexity, content difficulty level |
+
+#### Section 2: Nutrition & Diet (5-7 questions)
+
+| # | Question | Why it matters | Evidence connection | Maps to |
+|---|---------|---------------|--------------------|----|
+| 2.1 | "How would you describe your typical diet? (Mediterranean-style / Nordic / vegetarian / vegan / no specific pattern / keto-low carb / other)" | Dietary pattern is the single strongest modifiable factor for CVD and metabolic health | PREDIMED trial (Grade A) | HbA1c, triglycerides, LDL-C, hs-CRP predictions |
+| 2.2 | "How many servings of vegetables and fruits do you eat daily? (0-2 / 3-5 / 6+)" | Fiber intake directly affects microbiome diversity and SCFA production | Reynolds et al., Lancet, 2019 (Grade A) | Microbiome diversity, SCFAs, hs-CRP |
+| 2.3 | "How often do you eat fermented foods? (daily / a few times a week / rarely / never)" | Fermented food intake predicts microbiome diversity and lower inflammation | Wastyk et al., Cell, 2021 (Grade B) | Microbiome diversity, hs-CRP |
+| 2.4 | "How often do you eat fish? What types? (fatty fish like salmon 2+/week / occasional / rarely / never)" | Omega-3 intake is a strong CVD predictor; fish type matters for mercury | Harris et al., 2018 (Grade A) | Omega-3 Index, mercury exposure risk |
+| 2.5 | "How often do you eat red meat? (daily / 3-5x week / 1-2x week / rarely / never)" | Red meat frequency affects TMAO production, iron status, and gut microbiome | Tang et al., NEJM, 2013 (Grade B) for TMAO | TMAO, ferritin, microbiome composition |
+| 2.6 | "How much ultra-processed food do you eat? (most meals / some meals / occasionally / rarely)" | UPF consumption is independently associated with all-cause mortality | Hall et al., Cell Metabolism, 2019 (Grade B) | hs-CRP, HbA1c, triglycerides, gut health |
+| 2.7 | "How much alcohol do you drink per week? (none / 1-3 drinks / 4-7 / 8-14 / 15+)" | Alcohol affects liver enzymes, gut permeability, microbiome, sleep, hormones | GGT is most sensitive marker (Grade A) | GGT, ALT, triglycerides, cortisol, microbiome diversity |
+
+**Recommendations triggered by answers:**
+- Diet = "no specific pattern" + low veg intake → Recommend: "Mediterranean diet is the most evidence-backed dietary pattern for longevity (Grade A, PREDIMED trial). Even small shifts toward more vegetables, olive oil, and fish show measurable benefit."
+- Alcohol >7 drinks/week → Recommend tracking GGT + ALT: "Your alcohol intake may affect liver markers. Consider tracking GGT — it's the most sensitive marker for alcohol-related liver stress (Grade A)."
+- Never eats fermented foods → "Incorporating fermented foods like yogurt, kefir, or filmjölk may increase gut microbiome diversity and reduce inflammation (Grade B, Wastyk et al., Cell, 2021)."
+- Vegan/vegetarian → Flag B12 + ferritin + zinc + omega-3 as priority tests: "Plant-based diets are associated with lower B12, iron, zinc, and omega-3 levels. These are worth monitoring (Grade A)."
+
+#### Section 3: Cooking & Kitchen Environment (4-5 questions)
+
+| # | Question | Why it matters | Evidence connection | Maps to |
+|---|---------|---------------|--------------------|----|
+| 3.1 | "What type of cookware do you primarily use? (non-stick/Teflon / stainless steel / cast iron / ceramic-coated / mix of types)" | Non-stick cookware is the primary household source of PFAS exposure | Frisbee et al., 2010 (Grade A) | TSH, LDL-C, immune markers |
+| 3.2 | "If you use non-stick pans, are any scratched or do you cook on high heat with them?" | Scratched PTFE leaches more PFAS; high heat (>260°C) causes off-gassing | EWG/ATSDR guidance | Increases PFAS exposure risk assessment |
+| 3.3 | "Do you regularly heat food in plastic containers or use plastic wrap on hot food?" | Heat accelerates leaching of BPA, phthalates from plastic into food | Rochester, Reprod Toxicol, 2013 (Grade A for BPA) | Estradiol, testosterone, thyroid |
+| 3.4 | "What's your primary drinking water source? Do you filter it?" | PFAS, lead, chlorine in unfiltered water affect gut microbiome and multiple biomarkers | Multiple sources (Grade A for PFAS, lead) | LDL-C, TSH, eGFR, microbiome |
+| 3.5 | "Do you store food mainly in plastic, glass, or stainless steel?" | Chronic low-level BPA/phthalate exposure from plastic storage | Meeker et al., 2011 (Grade A for phthalates) | Hormones |
+
+**Recommendations triggered by answers:**
+- Uses scratched non-stick daily → "Non-stick cookware with PFAS coatings, especially when scratched, can leach chemicals linked to elevated cholesterol and thyroid disruption (Grade A, C8 Health Project). Consider replacing with stainless steel or enameled cast iron."
+- Heats food in plastic → "Heating plastic food containers can release BPA and phthalates, which are associated with hormonal disruption (Grade A). Switching to glass or stainless steel containers for reheating is a simple, high-impact change."
+- Unfiltered tap water → "A basic activated carbon filter removes ~60-70% of PFAS and most chlorine from tap water. If you're in an area with known contamination (check your municipality's water report), consider a reverse osmosis system for >95% removal."
+
+#### Section 4: Exercise & Physical Activity (4-5 questions)
+
+| # | Question | Why it matters | Evidence connection | Maps to |
+|---|---------|---------------|--------------------|----|
+| 4.1 | "How many minutes of moderate exercise (brisk walking, cycling) do you do per week? (0-60 / 60-150 / 150-300 / 300+)" | Exercise duration has a dose-response relationship with mortality reduction | Arem et al., JAMA Intern Med, 2015 (Grade A) | VO2max, resting HR, HRV, HbA1c |
+| 4.2 | "Do you do any resistance/strength training? (no / 1x week / 2-3x week / 4+ week)" | Resistance training independently reduces mortality; prevents sarcopenia | Momma et al., Br J Sports Med, 2022 (Grade A) | Grip strength, lean mass, testosterone |
+| 4.3 | "Do you know your VO2max? (yes + value / estimated from wearable / no idea)" | VO2max is the strongest single mortality predictor | Mandsager et al., 2018 (Grade A) | VO2max tracking |
+| 4.4 | "Do you use a wearable (Oura, Whoop, Apple Watch, Garmin)?" | Enables passive tracking of HR, HRV, steps, sleep | Device-specific data integration | Resting HR, HRV, step count, sleep |
+| 4.5 | "Do you practice cold exposure or sauna? (regularly / occasionally / no)" | Nordic wellness traditions with varying evidence | Laukkanen et al., 2015 (Grade B for sauna) | HRV, hs-CRP, cortisol |
+
+**Recommendations triggered by answers:**
+- <150 min/week exercise → "The strongest evidence-based recommendation for longevity is 150 min/week of moderate cardio plus 2x/week resistance training (Grade A). Even adding a daily 20-minute walk significantly reduces mortality risk."
+- No resistance training → "Resistance training at least 2x/week independently reduces all-cause mortality, separate from cardio benefits (Grade A, Momma et al., 2022). It's essential for maintaining muscle mass as you age."
+- Doesn't know VO2max → "VO2max is the single strongest predictor of lifespan — stronger than smoking, diabetes, or heart disease as a risk factor (Grade A, Mandsager et al., 2018). You can estimate it via a wearable or a simple 12-minute Cooper running test."
+
+#### Section 5: Sleep & Stress (3-4 questions)
+
+| # | Question | Why it matters | Evidence connection | Maps to |
+|---|---------|---------------|--------------------|----|
+| 5.1 | "How many hours of sleep do you typically get? (less than 6 / 6-7 / 7-8 / 8-9 / 9+)" | Sleep duration has U-shaped mortality curve; <6h and >9h are both risky | Cappuccio et al., Sleep, 2010 (Grade A) | Cortisol, HRV, fasting glucose, testosterone |
+| 5.2 | "How would you rate your sleep quality? (poor / fair / good / excellent)" | Sleep quality affects cortisol, insulin sensitivity, inflammation | Irwin et al., Biol Psychiatry, 2016 (Grade A) | hs-CRP, cortisol, fasting insulin |
+| 5.3 | "How would you rate your overall stress level? (low / moderate / high / very high)" | Chronic stress elevates cortisol, suppresses testosterone, increases inflammation | Epel et al., PNAS, 2004 (Grade A for stress-aging) | Cortisol, HRV, testosterone, hs-CRP |
+| 5.4 | "Do you have any stress management practices? (meditation, breathwork, nature time, therapy, none)" | Active stress management modifies HRV and cortisol | Pascoe et al., J Clin Med, 2017 (Grade B for meditation) | HRV, cortisol |
+
+**Recommendations triggered by answers:**
+- <6h sleep → "Sleeping less than 6 hours is associated with increased all-cause mortality and significantly impairs insulin sensitivity, immune function, and hormonal balance (Grade A). Suggest tracking cortisol and HRV to quantify the impact."
+- High stress + no management → "Chronic unmanaged stress elevates cortisol, suppresses testosterone, and drives inflammation. Consider adding HRV tracking — it's the best real-time indicator of your body's stress response. Even 10 minutes of daily meditation has measurable effects on cortisol (Grade B)."
+
+#### Section 6: Medical History & Medications (3-4 questions)
+
+| # | Question | Why it matters | Evidence connection | Maps to |
+|---|---------|---------------|--------------------|----|
+| 6.1 | "Do you take any regular medications? (none / statins / thyroid medication / metformin / blood pressure meds / hormonal / other)" | Medications affect biomarker interpretation and nutrient depletion | Specific per drug class | Biomarker interpretation context |
+| 6.2 | "Do you take any supplements currently? (vitamin D / omega-3 / magnesium / probiotics / B-vitamins / multivitamin / other / none)" | Establishes supplement baseline; avoids duplicate recommendations | Relevant per supplement | Supplement tracking, interaction checking |
+| 6.3 | "Any known family history of heart disease, diabetes, or cancer?" | Family history changes risk stratification and marker priority | Lp(a) for CVD family history (Grade A) | Lp(a), HbA1c, ApoB priority elevation |
+| 6.4 | "Have you had any recent blood tests? When was your last comprehensive panel?" | Establishes testing freshness and baseline availability | — | Test recency; data import opportunity |
+
+**Recommendations triggered by answers:**
+- Takes statins → Context note: "Statins lower LDL-C and ApoB but can elevate liver enzymes (ALT) and fasting glucose. These changes are expected and should be interpreted in this context."
+- Takes metformin → "Metformin can deplete vitamin B12 over time (Grade A). Add B12 to your tracking panel and consider annual testing."
+- Family history of heart disease → "With a family history of heart disease, testing Lp(a) is strongly recommended — it's a genetic risk factor that doesn't change with lifestyle, but knowing your level helps stratify your overall risk (Grade A). Also prioritize ApoB over LDL-C as your primary lipid marker."
+
+#### Section 7: Environmental & Home Summary (2-3 questions)
+
+| # | Question | Why it matters | Maps to |
+|---|---------|---------------|---------|
+| 7.1 | "Do you live in or near an area with known environmental contamination? (industrial, agricultural, military base)" | Localizes contaminant exposure risk | PFAS, heavy metal testing priority |
+| 7.2 | "What type of building do you live in? (modern / built before 1970 / unsure)" | Old buildings = lead pipe risk, mold risk | Lead testing, water testing |
+| 7.3 | "Do you smoke, or are you regularly exposed to secondhand smoke?" | Strongest single modifiable risk factor for mortality | All biomarkers (systemic damage) |
+
+### 13.4 Interview Output — The Health Profile
+
+After the interview, the AI generates a structured **Health Profile** with:
+
+```
+┌─────────────────────────────────────────────┐
+│  YOUR HEALTH PROFILE SUMMARY                 │
+├─────────────────────────────────────────────┤
+│                                              │
+│  Goal: Heart health                          │
+│                                              │
+│  RECOMMENDED BIOMARKER PANEL                 │
+│  Priority 1 (start now):                     │
+│    • ApoB, LDL-C, HDL-C, Triglycerides     │
+│    • hs-CRP                                 │
+│    • HbA1c                                   │
+│  Priority 2 (add at next test):              │
+│    • Lp(a) — family history flagged          │
+│    • Homocysteine                            │
+│  Priority 3 (3-6 months):                    │
+│    • VO2max, Resting HR                      │
+│    • Gut microbiome diversity                │
+│                                              │
+│  PERSONALIZED INSIGHTS                       │
+│  🔬 Your non-stick cookware use may          │
+│     contribute to elevated cholesterol        │
+│     (Grade A, C8 Health Project)             │
+│  🥗 Adding fermented foods 3x/week could     │
+│     improve gut diversity (Grade B)          │
+│  🏋️ Adding 2x/week resistance training       │
+│     independently reduces mortality (Grade A) │
+│                                              │
+│  ENVIRONMENTAL FLAGS                          │
+│  ⚠️ Consider replacing scratched non-stick   │
+│     pans with stainless steel                │
+│  ⚠️ Consider water filtration (activated     │
+│     carbon minimum)                          │
+│                                              │
+│  SUPPLEMENT SUGGESTIONS                       │
+│  💊 Vitamin D 2000 IU/day (Nordic winter)    │
+│     Grade A — retest in 3 months             │
+│                                              │
+│  ⚕️ This is educational information, not      │
+│  medical advice. Consult a healthcare         │
+│  professional before making changes.          │
+└─────────────────────────────────────────────┘
+```
+
+### 13.5 Data Model — Interview Storage
+
+The interview results should be stored for the nudge engine and AI insight generator:
+
+```sql
+-- User health interview responses
+CREATE TABLE IF NOT EXISTS health_interview (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  section VARCHAR(50) NOT NULL,         -- 'goals', 'nutrition', 'cooking', 'exercise', 'sleep', 'medical', 'environment'
+  question_key VARCHAR(100) NOT NULL,   -- e.g. 'cookware_type', 'alcohol_frequency'
+  answer_value TEXT NOT NULL,           -- user's answer
+  answer_metadata JSONB,               -- structured data (e.g. {"servings_per_week": 5})
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id, question_key)
+);
+
+-- AI-generated recommendations from interview
+CREATE TABLE IF NOT EXISTS interview_recommendations (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  category VARCHAR(50) NOT NULL,        -- 'biomarker', 'supplement', 'lifestyle', 'environmental'
+  recommendation TEXT NOT NULL,
+  evidence_grade VARCHAR(1) NOT NULL CHECK (evidence_grade IN ('A', 'B', 'C', 'D')),
+  citation TEXT,                        -- "Author, Journal, Year"
+  priority INTEGER DEFAULT 0,          -- 1 = highest
+  dismissed_at TIMESTAMP WITH TIME ZONE,
+  acted_on_at TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+### 13.6 Re-interview Triggers
+
+The AI should suggest revisiting parts of the interview when:
+
+| Trigger | Section to revisit | Timing |
+|---------|-------------------|--------|
+| 6 months since initial interview | Full re-interview | Proactive nudge |
+| User enters new biomarker results that conflict with interview answers | Relevant section | At result entry |
+| Seasonal change (autumn, spring) | Nutrition, supplements | Seasonal nudge |
+| User achieves a goal | Goals section — set new goals | At goal completion |
+| New environmental health research published | Environmental section | Content-triggered |
+
+---
+
+*Last updated: 2026-02-12*
 *Evidence grades reflect the state of research as of early 2026.*
 *All citations should be verified against current literature when building content.*

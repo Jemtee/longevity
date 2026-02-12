@@ -264,3 +264,27 @@ Milestone unlocks: 2 readings = trend arrow, 5+ markers = cross-correlations, 12
 - Homocysteine >12 µmol/L → methylfolate + B12 + B6 (Grade A)
 - Omega-3 Index <8% → 2-3g EPA+DHA/day (Grade A)
 - Low gut diversity → prebiotic fiber 5-15g/day, titrate slowly (Grade B)
+
+### Environmental Health — PFAS, Cookware & Toxin Exposure
+
+The app assesses environmental exposures and connects them to biomarkers (see full reference for detailed tables):
+
+- **PFAS ("forever chemicals")** from non-stick cookware, water, food packaging → elevated cholesterol (Grade A), thyroid disruption (Grade A), immune suppression (Grade A). Scratched Teflon and unfiltered water are the primary household sources.
+- **Cookware safety tiers:** Best = stainless steel, enameled cast iron, glass. Caution = PTFE non-stick. Avoid = scratched non-stick, unlined copper.
+- **BPA/phthalates** from heated plastic → hormonal disruption (Grade A). Recommend glass/steel for food storage and reheating.
+- **Heavy metals:** Mercury from large fish (limit predatory species), lead from old plumbing, cadmium from smoking/rice.
+- **Water filtration:** Activated carbon removes ~60-70% PFAS; reverse osmosis >95%. Relevant for Nordic areas with documented PFAS contamination.
+
+### AI Health Interview (Planned Feature)
+
+A guided conversational assessment across 7 sections that maps user answers to science-graded biomarker and lifestyle recommendations:
+
+1. **Goals & Motivation** — anchors the nudge expansion path
+2. **Nutrition & Diet** — maps dietary patterns to metabolic, gut, and inflammatory markers
+3. **Cooking & Kitchen Environment** — assesses PFAS, BPA, heavy metal exposure from cookware, water, and food storage
+4. **Exercise & Physical Activity** — identifies gaps in cardio, resistance training, VO2max
+5. **Sleep & Stress** — connects to cortisol, HRV, insulin sensitivity
+6. **Medical History & Medications** — flags nutrient depletion (e.g., metformin → B12) and family risk (→ Lp(a))
+7. **Environmental & Home** — localizes contamination risk (old plumbing, industrial proximity)
+
+Every recommendation from the interview carries an evidence grade and citation. The interview generates a **Health Profile** with prioritized biomarker panels, lifestyle insights, environmental flags, and supplement suggestions. Results are stored for the nudge engine and AI insight generator. Re-interview is triggered every 6 months or when new test results conflict with stored answers.
