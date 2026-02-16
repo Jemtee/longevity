@@ -311,3 +311,23 @@ Every recommendation from the interview carries an evidence grade and citation. 
 **Chart libraries:** Recharts (trend lines, area charts), @xyflow/react (connection graph, Phase 3)
 
 **Shadcn/ui components to add:** badge, tooltip, tabs, dialog, alert, separator, slider, toggle-group, accordion, sheet, skeleton, collapsible
+
+### UX Audit & Competitor Benchmarking
+
+> Full reference: Section 17 in [`project-fundamentals/ui-visualization-guide.md`](project-fundamentals/ui-visualization-guide.md)
+
+A competitive UX audit was conducted against Oura, Whoop, Levels, Neko Health, InsideTracker, Apple Health, Eight Sleep, and Cronometer. Key findings and action items:
+
+**Critical issues to fix (priority order):**
+
+1. **Empty dashboard** — Show a hero health score (Oura-inspired radial) or guided first-action prompt instead of placeholder text when the user has no data.
+2. **No user values on biomarker cards** — Each card must show the latest value, status color, unit, and date tested. Use range bars and sparklines for at-a-glance context.
+3. **No "Add Test Result" flow** — Add a prominent floating action button and a multi-step dialog for entering results (select biomarker → enter value + date → confirm).
+4. **No transitions or motion** — Implement a motion design system with `fade-in`, `scale-in`, `slide-up`, and `draw-line` animations via Tailwind keyframes. Use staggered delays for card lists.
+
+**Design direction:**
+- **Warm Scandinavian aesthetic** (Neko-inspired): increase whitespace, soften card borders to `border-gray-100`, use `bg-gray-50/50` page backgrounds, and rely on color accents only for data (status, trends).
+- **Progressive disclosure**: show "one big thing" per screen (health score on dashboard, single biomarker detail on drill-down). Avoid information overload.
+- **Loading states**: skeleton shimmer for every data-fetching component using Shadcn/ui `Skeleton`.
+- **Empty states**: illustration + educational CTA for every section that could be empty.
+- **Accessibility**: visible focus rings, `prefers-reduced-motion` support, WCAG AA color contrast on all status colors.

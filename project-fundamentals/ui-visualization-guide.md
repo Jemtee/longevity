@@ -835,4 +835,377 @@ npm install @xyflow/react         # Interactive biomarker connection graph
 
 ---
 
-*Last updated: 2026-02-15*
+## 17. UX Audit — Competitor Analysis & Improvement Plan
+
+### 17.1 Competitor Benchmarks
+
+Based on analysis of Oura, Whoop, Levels, Apple Health, InsideTracker, Neko Health, Eight Sleep, and Cronometer:
+
+| Principle | Industry best practice | Current Wellspring | Gap |
+|-----------|----------------------|-------------------|-----|
+| **"One big thing" on home screen** | Oura shows readiness score; Whoop shows recovery; Levels shows metabolic zone — all in 0 taps | Welcome text + static goal cards with hardcoded data | No hero metric. User sees text, not data. |
+| **Color-coded health status** | Universal green/amber/red for optimal/borderline/action (Oura, Whoop, InsideTracker) | Only green for "optimal" label on biomarker page; no amber/red system | No status indicators on biomarker cards. Range bar missing. |
+| **Trend direction at a glance** | Oura sparklines, Apple Health trend arrows, Eight Sleep score history | None — no trend visualization anywhere | No trend data shown; no sparklines, no arrows |
+| **Score/ring visualization** | Oura circle progress, Whoop strain gauge, Levels zone ring | Only `Progress` bar (h-2, primary-500) for goal tracking | Flat progress bars only; no category health rings |
+| **Progressive disclosure** | All top apps: headline → detail on tap → deep dive on scroll | All content visible at once on every page | No expand/collapse; no detail views; no drill-down |
+| **Animated transitions** | Oura color state transitions; Eight Sleep curve animations; Whoop recovery gauge animation | `transition-colors` on hover only (border, text color) | No entrance animations, no data transitions, no skeleton loading |
+| **Skeleton loading states** | Standard in all modern apps — prevents layout shift and signals content incoming | None — pages render blank then full content | No loading states; jarring flash on server component render |
+| **Onboarding personalization** | Whoop starts simple + reveals depth; Oura "one big thing"; Levels customizes to goal | 3-step form in a single card — checkboxes and selects, no feedback until submit | No progressive feedback; no "here's what we learned" summary; no immediate value |
+| **Journal / habit tracking** | Whoop: 140+ customizable daily parameters; auto-prompts every morning | Checkbox list of 5 habits in onboarding only | No ongoing habit tracking; habits are asked once and never revisited |
+| **Scandinavian design aesthetic** | Neko Health: pastels, generous whitespace, minimal surfaces, psychological safety | Gray-50 backgrounds, standard card borders, no distinctive warmth | Functional but generic; doesn't evoke the Neko-style calm/premium feel |
+
+### 17.2 Critical UX Issues (Fix Now)
+
+#### Issue 1: Dashboard has no data — it's a static wireframe
+
+**Current state:** The returning user dashboard shows hardcoded goals ("3 of 5 biomarkers tracked" — always) and a static recommendations list. There's no actual user data displayed.
+
+**Fix:** The dashboard hero should show real data:
+- If user has test results → show the most important metric as a hero number
+- If user has no data yet → show the interview CTA as a prominent action card
+- Replace hardcoded goals with actual database-driven counts
+
+**Competitor reference:** Oura shows your readiness score front-and-center the moment you open the app. Whoop shows recovery percentage. The "one big thing" principle.
+
+#### Issue 2: Biomarker cards show reference ranges but no user values
+
+**Current state:** Biomarker page lists all 30 markers grouped by category, showing name + reference/optimal ranges. But no user values are displayed — there's no way to see your actual results on this page.
+
+**Fix:**
+- Fetch user's latest test results and display them on each biomarker card
+- Add the range bar visualization (Section 5.2) showing where the value falls
+- Add trend sparkline if 2+ readings exist
+- Add status badge (green/amber/red) based on where value sits
+
+**Competitor reference:** InsideTracker shows value + color coding + trend for every biomarker on a single dashboard view. Cronometer shows fill bars for every nutrient.
+
+#### Issue 3: No "Add Test Result" flow anywhere
+
+**Current state:** There is no way for a user to enter a biomarker value. The `test_results` table exists in the schema but there's no UI to write to it.
+
+**Fix:** Add a prominent "Log Result" button on:
+- Each biomarker card (small icon button)
+- The biomarker detail page (primary CTA)
+- A floating action button on mobile
+
+Use a Dialog (Shadcn/ui) with: biomarker selector, value input, date picker, optional notes field.
+
+#### Issue 4: No transitions or motion — the app feels static
+
+**Current state:** The only motion is `transition-colors` on hover (border and text color changes). No page transitions, no data animations, no entrance effects.
+
+**Fix — Motion Design System:**
+
+```
+Entry animations (pages & cards):
+  - Cards: fade-in + translate-y-2 → 0, duration-300, stagger 50ms per card
+  - Pages: fade-in opacity 0 → 1, duration-200
+  - Numbers: count-up animation on first render (for hero metrics)
+
+State transitions:
+  - Range bar fill: animate width from 0 → actual%, duration-500, ease-out
+  - Progress bars: already have transition-all duration-300 (good)
+  - Status color: cross-fade between states, duration-200
+
+Micro-interactions:
+  - Button press: scale-95 on active, duration-75
+  - Card tap: subtle scale-[0.98] + shadow increase, duration-100
+  - Checkmark toggle: spring animation (scale 0 → 1.1 → 1.0)
+  - Sparkline draw: SVG stroke-dashoffset animation, duration-800
+
+Loading states:
+  - Skeleton shimmer: bg-gradient animate-pulse (Shadcn skeleton)
+  - Replace every data fetch with skeleton → real content transition
+
+Page transitions:
+  - Use CSS View Transitions API (Next.js 16 supports this)
+  - Or framer-motion: AnimatePresence for route changes
+  - Keep it subtle: opacity + y-translate, max 200ms
+```
+
+**Implementation — Tailwind animation utilities to add:**
+
+```js
+// tailwind.config.js — extend animation
+module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'scale-in': {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(16px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'count-up': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'draw-line': {
+          '0%': { strokeDashoffset: '100%' },
+          '100%': { strokeDashoffset: '0' },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.3s ease-out',
+        'scale-in': 'scale-in 0.2s ease-out',
+        'slide-up': 'slide-up 0.4s ease-out',
+        'draw-line': 'draw-line 0.8s ease-out forwards',
+      },
+    },
+  },
+}
+```
+
+**Usage pattern for staggered card entry:**
+```tsx
+{items.map((item, i) => (
+  <div
+    key={item.id}
+    className="animate-fade-in"
+    style={{ animationDelay: `${i * 50}ms`, animationFillMode: 'backwards' }}
+  >
+    <BiomarkerCard marker={item} />
+  </div>
+))}
+```
+
+### 17.3 Design Improvements (Polish Phase)
+
+#### Improvement 1: Warm Scandinavian aesthetic (Neko-inspired)
+
+**Current:** Generic gray-50 backgrounds, standard borders, no warmth.
+
+**Proposed changes:**
+- Background: shift from `gray-50` to a subtle warm tone: `bg-[#fafaf8]` (off-white with warm undertone)
+- Card backgrounds: keep white but add `shadow-sm hover:shadow-md transition-shadow` for depth
+- Border color: soften from `gray-200` to `gray-150` / `border-[#e8e6e3]` (warmer gray)
+- Add subtle gradient headers on key cards: `bg-gradient-to-r from-white to-primary-50/30`
+- Typography: increase line-height on body text to 1.6 (more breathable)
+- Spacing: increase `space-y-6` to `space-y-8` on main containers (more whitespace)
+
+**Neko principle:** Premium health UX comes from generous whitespace and visual restraint, not feature density.
+
+#### Improvement 2: Hero health score (Oura-inspired)
+
+Replace the generic "Welcome back" header with a dynamic health overview:
+
+```
+┌──────────────────────────────────────────────────────┐
+│                                                        │
+│   Good morning, Erik                                   │
+│                                                        │
+│   ┌──────┐   ┌──────┐   ┌──────┐   ┌──────┐         │
+│   │  🟢  │   │  🟡  │   │  🟢  │   │  ○○  │         │
+│   │  5/5  │   │  3/5  │   │  2/2  │   │  0/3  │         │
+│   │ Meta- │   │ Cardio│   │ Vita- │   │ Gut   │         │
+│   │ bolic │   │       │   │ mins  │   │ Health│         │
+│   └──────┘   └──────┘   └──────┘   └──────┘         │
+│   optimal     mixed      optimal     not tracked      │
+│                                                        │
+│   ┌────────────────────────────────────────────────┐  │
+│   │ 💡 Your Vitamin D is due for a retest (last:   │  │
+│   │    Sep 2025). Winter supplementation check. [A] │  │
+│   │    [ Schedule Retest ]      [ Dismiss ]         │  │
+│   └────────────────────────────────────────────────┘  │
+│                                                        │
+└──────────────────────────────────────────────────────┘
+```
+
+**Key elements:**
+- Horizontally scrolling category health rings (mobile) or grid (desktop)
+- Each ring: donut showing proportion of markers in optimal/borderline/out-of-range
+- Single most important nudge/insight below
+- Greeting uses actual time of day ("Good morning" / "Good afternoon" / "Good evening")
+
+#### Improvement 3: Biomarker card redesign with data
+
+**Current card:**
+```
+┌────────────────────────┐
+│ HbA1c          [Sv]    │
+│ Reference: 20-42       │
+│ Optimal: 20-36         │
+└────────────────────────┘
+```
+
+**Proposed card (with data):**
+```
+┌────────────────────────────────────────────┐
+│  HbA1c                          ↗ 33 → 35 │
+│  35 mmol/mol             ┌──────────────┐  │
+│  ✅ Optimal              │ ··  ·        │  │
+│                          │·  ··  ·      │  │
+│  ├──[████████░░]─────┤   └──────────────┘  │
+│  20   optimal    36  42   6-month sparkline │
+│      ↑ you                                 │
+│                                            │
+│  [ + Log Result ]    [ View Details → ]    │
+└────────────────────────────────────────────┘
+```
+
+**Key additions:**
+- Large value number (prominent, left-aligned)
+- Status badge with icon (CheckCircle/AlertTriangle/AlertCircle)
+- Range bar with marker showing position
+- Sparkline (last 3-6 readings, 64x24px SVG)
+- Trend direction + delta from previous reading
+- Action buttons: log new result, view detail page
+
+#### Improvement 4: Loading skeletons everywhere
+
+Every data-dependent component should show a skeleton before real data loads:
+
+```tsx
+// components/ui/biomarker-card-skeleton.tsx
+export function BiomarkerCardSkeleton() {
+  return (
+    <div className="p-4 border rounded-lg animate-pulse">
+      <div className="flex justify-between mb-3">
+        <div className="h-5 w-24 bg-gray-200 rounded" />
+        <div className="h-5 w-16 bg-gray-200 rounded" />
+      </div>
+      <div className="h-8 w-20 bg-gray-200 rounded mb-2" />
+      <div className="h-2 w-full bg-gray-200 rounded-full mb-3" />
+      <div className="flex justify-between">
+        <div className="h-4 w-16 bg-gray-200 rounded" />
+        <div className="h-4 w-16 bg-gray-200 rounded" />
+      </div>
+    </div>
+  )
+}
+```
+
+Use React Suspense boundaries around data-fetching components, with skeleton fallbacks.
+
+#### Improvement 5: Empty states that guide action
+
+Every page needs a designed empty state when there's no data:
+
+```
+┌──────────────────────────────────────────────────┐
+│                                                    │
+│            ┌────────────────┐                      │
+│            │   📊           │                      │
+│            │                │                      │
+│            └────────────────┘                      │
+│                                                    │
+│   No biomarker data yet                            │
+│                                                    │
+│   Log your first test result to start tracking     │
+│   your health journey. We recommend starting with  │
+│   your most recent blood test.                     │
+│                                                    │
+│   [ Log Your First Result ]                        │
+│                                                    │
+│   Or take the Health Interview to get personalized │
+│   recommendations on what to test first.           │
+│                                                    │
+│   [ Start Health Interview → ]                     │
+│                                                    │
+└──────────────────────────────────────────────────┘
+```
+
+**Competitor reference:** Oura shows "wear your ring tonight" as first empty state — clear, single action. Not a wall of placeholder content.
+
+### 17.4 Motion Design Specification
+
+#### Hierarchy of Motion
+
+| Priority | Element | Animation | Duration | Easing |
+|----------|---------|-----------|----------|--------|
+| 1 (critical) | Page content entrance | fade-in + slide-up | 300ms | ease-out |
+| 1 | Skeleton → real content | cross-fade | 200ms | ease-in-out |
+| 2 (important) | Card entrance (staggered) | fade-in + translate-y(8px) | 300ms, stagger 50ms | ease-out |
+| 2 | Range bar fill | width 0 → value | 500ms | ease-out |
+| 2 | Number count-up (hero metrics) | 0 → actual value | 600ms | ease-out |
+| 3 (delightful) | Sparkline draw | stroke-dashoffset | 800ms | ease-out |
+| 3 | Status badge appear | scale(0.8) → scale(1) | 200ms | spring |
+| 3 | Trend arrow | fade-in + slight bounce | 300ms | spring |
+| 4 (subtle) | Button press | scale(0.97) | 75ms | ease-in |
+| 4 | Card hover | shadow-sm → shadow-md | 150ms | ease-out |
+| 4 | Nav link active state | background color fade | 150ms | ease-in-out |
+
+#### Animation Timing Rules
+
+1. **Never animate anything longer than 800ms** — feels slow.
+2. **Content entrance: 200-400ms.** Any faster feels abrupt; any slower blocks the user.
+3. **Stagger: 30-60ms between cards.** More than 100ms feels sequential instead of grouped.
+4. **Data transitions: 400-600ms.** Give the eye time to follow the change.
+5. **Micro-interactions: 50-150ms.** Instant feedback for clicks and hovers.
+6. **Respect prefers-reduced-motion.** Disable all animation when this media query is active:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+#### Recommended Animation Library
+
+**framer-motion** (lightweight, React-native, SSR-compatible):
+
+```bash
+npm install framer-motion
+```
+
+Use for:
+- Page transitions (AnimatePresence + layout animations)
+- Staggered card entrance (staggerChildren)
+- Number count-up (useSpring + useMotionValue)
+- Gesture responses (whileTap, whileHover)
+
+Keep Tailwind CSS transitions for simple hover/focus states. Use framer-motion only where Tailwind's `animate-*` is insufficient.
+
+### 17.5 Typography & Spacing Refinements
+
+| Element | Current | Proposed | Rationale |
+|---------|---------|----------|-----------|
+| Page heading | `text-3xl font-bold` | `text-3xl font-bold tracking-tight` | Tighter tracking on large text looks more premium |
+| Body line-height | Default (1.5) | `leading-relaxed` (1.625) | More breathable, easier to read health content |
+| Card internal spacing | `p-6` | `p-6 lg:p-8` | More generous padding on desktop |
+| Section spacing | `space-y-6` | `space-y-8` | More whitespace between sections |
+| Muted text | `text-gray-600` | `text-gray-500` | Slightly softer for less visual noise |
+| Small labels | `text-xs` | `text-xs font-medium tracking-wide uppercase` | Consistent label treatment for categories/badges |
+
+### 17.6 Accessibility Additions
+
+| Requirement | Current state | Fix |
+|------------|--------------|-----|
+| Color-blind safety | Colors alone indicate status | Add icons to every status indicator (CheckCircle, AlertTriangle, AlertCircle) |
+| Focus indicators | Default browser focus ring | `focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2` on all interactive elements |
+| Screen reader labels | Inputs have labels; some icons don't have sr-only text | Add `aria-label` to all icon-only buttons; add `role="status"` to live-updating metrics |
+| Reduced motion | No consideration | Add `prefers-reduced-motion` media query to disable all animations |
+| Touch targets | Some links/buttons are small (`px-3 py-1.5` on mobile nav) | Minimum 44x44px touch targets on all interactive elements |
+| Semantic HTML | Mostly divs | Use `<section>`, `<article>`, `<nav>` landmarks; use `<h2>` for card titles instead of `<div>` |
+
+### 17.7 Priority Implementation Order
+
+| Phase | What | Impact | Effort |
+|-------|------|--------|--------|
+| **Now** | Add test result entry dialog | Unblocks core app functionality | Medium |
+| **Now** | Show user's actual values on biomarker cards | Makes the app useful | Medium |
+| **Now** | Add loading skeletons (Shadcn skeleton component) | Eliminates blank-screen flash | Low |
+| **Now** | Add range bar component | Key data visualization | Medium |
+| **Next** | Dashboard hero with category health rings | "One big thing" principle | Medium |
+| **Next** | Card entrance animations (Tailwind keyframes) | Premium feel | Low |
+| **Next** | Empty state designs for all pages | Guides new users | Low |
+| **Next** | Trend sparkline component (SVG) | Shows trajectory at a glance | Medium |
+| **Later** | framer-motion page transitions | Smooth navigation | Medium |
+| **Later** | Number count-up animation | Delightful detail | Low |
+| **Later** | Interactive connection graph (@xyflow/react) | Differentiator feature | High |
+| **Later** | Dark mode polish | Currently defined in CSS but not user-togglable | Medium |
+
+---
+
+*Last updated: 2026-02-16*
