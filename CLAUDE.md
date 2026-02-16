@@ -288,3 +288,26 @@ A guided conversational assessment across 7 sections that maps user answers to s
 7. **Environmental & Home** — localizes contamination risk (old plumbing, industrial proximity)
 
 Every recommendation from the interview carries an evidence grade and citation. The interview generates a **Health Profile** with prioritized biomarker panels, lifestyle insights, environmental flags, and supplement suggestions. Results are stored for the nudge engine and AI insight generator. Re-interview is triggered every 6 months or when new test results conflict with stored answers.
+
+### Visualization & UI Conventions
+
+> Full reference: [`project-fundamentals/ui-visualization-guide.md`](project-fundamentals/ui-visualization-guide.md)
+
+**Color semantics (consistent across entire app):**
+- Biomarker status: green (optimal), amber (borderline), red (out of range), gray (no data)
+- Trend direction: green (improving), blue (stable), red (declining)
+- Evidence grades: A = solid primary badge, B = light primary badge, C = dashed amber badge, D = dashed gray badge
+- Environmental risk: red (high), amber (moderate), green (low/safe) — paired with Shield icons
+
+**Key visualization patterns:**
+- **Range bar** — horizontal bar showing where a value sits within optimal/reference zones
+- **Trend sparkline** — tiny 64x24px inline chart for last 3-6 readings
+- **Evidence grade badge** — colored pill (A-D) with tooltip explaining the grade
+- **Insight cards** — severity-coded (green/amber/red/blue border-left) with evidence badge and actions
+- **Nudge cards** — subtle, dismissible, max 1 visible, with citation and [Add to Panel] / [Not Now] actions
+- **Biomarker connection view** — flat card list (Phase 1) → interactive node graph (Phase 3)
+- **Interview flow** — chat-style AI message + structured input cards (option grids, sliders, pill toggles)
+
+**Chart libraries:** Recharts (trend lines, area charts), @xyflow/react (connection graph, Phase 3)
+
+**Shadcn/ui components to add:** badge, tooltip, tabs, dialog, alert, separator, slider, toggle-group, accordion, sheet, skeleton, collapsible
