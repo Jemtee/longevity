@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { CheckCircle2 } from 'lucide-react'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -23,7 +24,6 @@ export default function SignupPage() {
     setError(null)
     setSuccess(false)
 
-    // Validation
     if (password !== confirmPassword) {
       setError('Passwords do not match')
       setLoading(false)
@@ -49,8 +49,6 @@ export default function SignupPage() {
 
       if (data.user) {
         setSuccess(true)
-        // Note: Supabase sends confirmation email by default
-        // User will be redirected after confirming email
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred during signup')
@@ -80,156 +78,153 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-white p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-3xl font-display text-center text-success">
-              Check your email
-            </CardTitle>
-            <CardDescription className="text-center">
-              We've sent a confirmation link to {email}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground text-center">
-              Click the link in the email to activate your account and start your longevity journey with Wellspring.
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={() => router.push('/login')}
-            >
-              Back to login
-            </Button>
-          </CardFooter>
-        </Card>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50/50 p-4">
+        <div className="w-full max-w-sm animate-scale-in">
+          <Card className="border-gray-100 shadow-sm">
+            <CardContent className="pt-8 pb-6 px-7 text-center space-y-4">
+              <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-6 h-6 text-green-600" />
+              </div>
+              <div className="space-y-1">
+                <h1 className="text-xl font-semibold text-gray-900">Check your email</h1>
+                <p className="text-sm text-gray-500">
+                  We&apos;ve sent a confirmation link to <span className="font-medium text-gray-700">{email}</span>
+                </p>
+              </div>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                Click the link to activate your account and start your longevity journey.
+              </p>
+            </CardContent>
+            <CardFooter className="pb-7 px-7">
+              <Button
+                variant="outline"
+                className="w-full border-gray-200"
+                onClick={() => router.push('/login')}
+              >
+                Back to sign in
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-white p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-3xl font-display text-center">
-            Create an account
-          </CardTitle>
-          <CardDescription className="text-center">
-            Start your longevity journey with Wellspring
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form onSubmit={handleSignup} className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="name@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-              />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50/50 p-4">
+      <div className="w-full max-w-sm animate-fade-in">
+        {/* Logo */}
+        <div className="flex items-center justify-center gap-2.5 mb-8">
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center shadow-sm">
+            <span className="text-white font-bold text-base">W</span>
+          </div>
+          <span className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+            Wellspring
+          </span>
+        </div>
+
+        <Card className="border-gray-100 shadow-sm">
+          <CardContent className="pt-8 pb-6 px-7 space-y-6">
+            <div className="text-center space-y-1">
+              <h1 className="text-xl font-semibold text-gray-900">Create your account</h1>
+              <p className="text-sm text-gray-500">Start your longevity journey</p>
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={8}
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-              <p className="text-xs text-muted-foreground">
-                Must be at least 8 characters
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="confirmPassword" className="text-sm font-medium">
-                Confirm password
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="••••••••"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            {error && (
-              <div className="p-3 text-sm text-destructive bg-destructive/10 rounded-md">
-                {error}
+            <form onSubmit={handleSignup} className="space-y-4">
+              <div className="space-y-1.5">
+                <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-3.5 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
+                />
               </div>
-            )}
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Creating account...' : 'Create account'}
+              <div className="space-y-1.5">
+                <label htmlFor="password" className="text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Minimum 8 characters"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  className="w-full px-3.5 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                  Confirm password
+                </label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Repeat your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className="w-full px-3.5 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
+                />
+              </div>
+
+              {error && (
+                <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg">
+                  {error}
+                </div>
+              )}
+
+              <Button type="submit" className="w-full h-10" disabled={loading}>
+                {loading ? 'Creating account...' : 'Create account'}
+              </Button>
+            </form>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-100" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-white px-3 text-xs text-gray-400 uppercase tracking-wider">
+                  or
+                </span>
+              </div>
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full h-10 border-gray-200 hover:bg-gray-50"
+              onClick={handleGoogleSignup}
+              disabled={loading}
+            >
+              <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+              </svg>
+              Continue with Google
             </Button>
-          </form>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-          </div>
-
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={handleGoogleSignup}
-            disabled={loading}
-          >
-            <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
-              <path
-                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                fill="#4285F4"
-              />
-              <path
-                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                fill="#34A853"
-              />
-              <path
-                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                fill="#FBBC05"
-              />
-              <path
-                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                fill="#EA4335"
-              />
-            </svg>
-            Google
-          </Button>
-        </CardContent>
-        <CardFooter>
-          <div className="text-sm text-center text-muted-foreground w-full">
-            Already have an account?{' '}
-            <Link href="/login" className="text-primary hover:underline font-medium">
-              Sign in
-            </Link>
-          </div>
-        </CardFooter>
-      </Card>
+          </CardContent>
+          <CardFooter className="justify-center pb-7">
+            <p className="text-sm text-gray-500">
+              Already have an account?{' '}
+              <Link href="/login" className="text-primary-600 hover:text-primary-700 font-medium">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   )
 }

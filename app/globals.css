@@ -26,8 +26,8 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 203 89% 53%;
     --radius: 0.75rem;
     --chart-1: 203 89% 53%;
@@ -69,12 +69,53 @@
   * {
     border-color: hsl(var(--border));
   }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cal Sans', system-ui, sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  /* Form input styling - fix the dark select issue */
+  select,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  textarea {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+}
+
+@layer utilities {
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-scale-in,
+    .animate-slide-up {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 }
