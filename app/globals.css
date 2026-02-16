@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Wellspring Brand Colors */
+    /* Premium Color Palette */
     --primary: 203 89% 53%;
     --secondary: 18 23% 66%;
     --success: 142 71% 45%;
@@ -29,7 +32,7 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 203 89% 53%;
-    --radius: 0.75rem;
+    --radius: 1rem;
     --chart-1: 203 89% 53%;
     --chart-2: 142 71% 45%;
     --chart-3: 38 92% 50%;
@@ -67,14 +70,122 @@
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    @apply border-gray-200;
   }
+
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-gradient-to-br from-gray-50 via-white to-blue-50/30 text-gray-900;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cal Sans', system-ui, sans-serif;
+    font-family: 'General Sans', 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl;
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-4xl md:text-5xl;
+    line-height: 1.15;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+    line-height: 1.25;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/60 border border-white/20 shadow-xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+  }
+
+  /* Premium gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #6366f1 100%);
+  }
+
+  .gradient-mesh {
+    background:
+      radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+  }
+
+  /* Hero section styling */
+  .hero-section {
+    @apply relative overflow-hidden;
+    min-height: 400px;
+  }
+
+  .hero-overlay {
+    @apply absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/80 to-purple-600/90;
+    mix-blend-mode: multiply;
+  }
+
+  /* Premium shadow system */
+  .shadow-premium {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.03),
+      0 2px 4px rgba(0, 0, 0, 0.05),
+      0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-premium-lg {
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.03),
+      0 4px 8px rgba(0, 0, 0, 0.05),
+      0 24px 48px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #6366f1 100%);
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    border-radius: 1rem;
+    padding: 1px;
+    background: linear-gradient(135deg, #0ea5e9, #3b82f6, #6366f1);
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    padding: 1px;
+    background: linear-gradient(135deg, #0ea5e9, #3b82f6, #6366f1);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
+@layer utilities {
+  /* Smooth scroll */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Text balance for headlines */
+  .text-balance {
+    text-wrap: balance;
   }
 }
