@@ -1,6 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { BookOpen, Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { BookOpen, Search, Clock } from 'lucide-react'
+
+export const metadata = {
+  title: 'Content - Wellspring',
+  description: 'Learn about longevity science',
+}
 
 export default async function ContentPage() {
   const sampleArticles = [
@@ -42,90 +46,91 @@ export default async function ContentPage() {
     },
   ]
 
+  const categories = [
+    { name: 'Getting Started', count: 6, color: 'bg-blue-50 text-blue-700' },
+    { name: 'Metabolic Health', count: 8, color: 'bg-orange-50 text-orange-700' },
+    { name: 'Cardiovascular', count: 7, color: 'bg-red-50 text-red-700' },
+    { name: 'Longevity Science', count: 12, color: 'bg-green-50 text-green-700' },
+  ]
+
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <BookOpen className="w-8 h-8 text-primary-500" />
-          <div>
-            <h1 className="text-3xl font-bold">Content Library</h1>
-            <p className="text-gray-600">Learn about longevity science and optimize your health</p>
-          </div>
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="flex items-center gap-3 animate-fade-in">
+        <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+          <BookOpen className="w-5 h-5 text-indigo-600" />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Content Library</h1>
+          <p className="text-sm text-gray-500">Learn about longevity science</p>
         </div>
       </div>
 
-      {/* Search Bar */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search articles, biomarkers, or topics..."
-              className="w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
-          </div>
-        </CardContent>
-      </Card>
+      {/* Search */}
+      <div className="relative animate-fade-in" style={{ animationDelay: '50ms' }}>
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400" />
+        <input
+          type="text"
+          placeholder="Search articles, biomarkers, or topics..."
+          className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
+        />
+      </div>
 
-      {/* Featured Categories */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {['Getting Started', 'Metabolic Health', 'Cardiovascular', 'Longevity Science'].map((category) => (
-          <Card key={category} className="hover:border-primary-500 transition-colors cursor-pointer">
-            <CardContent className="pt-6 text-center">
-              <h3 className="font-medium">{category}</h3>
-              <p className="text-sm text-gray-500 mt-1">12 articles</p>
-            </CardContent>
-          </Card>
+      {/* Categories */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 animate-fade-in" style={{ animationDelay: '100ms' }}>
+        {categories.map((cat) => (
+          <div
+            key={cat.name}
+            className="group p-4 rounded-xl bg-white border border-gray-100 hover:border-primary-200 hover:shadow-sm transition-all duration-200 cursor-pointer text-center"
+          >
+            <h3 className="text-sm font-medium text-gray-900 group-hover:text-primary-700 transition-colors">{cat.name}</h3>
+            <p className="text-xs text-gray-400 mt-0.5">{cat.count} articles</p>
+          </div>
         ))}
       </div>
 
-      {/* Articles Grid */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Latest Articles</CardTitle>
-          <CardDescription>Curated content to help you on your longevity journey</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sampleArticles.map((article) => (
-              <div
-                key={article.title}
-                className="p-4 border rounded-lg hover:border-primary-500 transition-colors cursor-pointer group"
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <span className="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">
+      {/* Articles */}
+      <div>
+        <h2 className="text-base font-semibold text-gray-900 mb-4">Latest Articles</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {sampleArticles.map((article, i) => (
+            <Card
+              key={article.title}
+              className="group border-gray-100 shadow-sm hover:shadow-md hover:border-primary-100 transition-all duration-200 cursor-pointer animate-slide-up overflow-hidden"
+              style={{ animationDelay: `${150 + i * 50}ms` }}
+            >
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[11px] font-medium text-primary-700 bg-primary-50 px-2 py-0.5 rounded-full">
                     {article.category}
                   </span>
-                  <span className="text-xs text-gray-500">{article.readTime}</span>
+                  <span className="flex items-center gap-1 text-[11px] text-gray-400">
+                    <Clock className="w-3 h-3" />
+                    {article.readTime}
+                  </span>
                 </div>
-                <h3 className="font-medium mb-2 group-hover:text-primary-600 transition-colors">
+                <h3 className="text-sm font-medium text-gray-900 group-hover:text-primary-700 transition-colors mb-2 leading-snug">
                   {article.title}
                 </h3>
-                <p className="text-sm text-gray-600 mb-3">{article.excerpt}</p>
-                <Button variant="ghost" size="sm" className="w-full">
-                  Read More
-                </Button>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+                <p className="text-xs text-gray-500 leading-relaxed">{article.excerpt}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
 
-      <Card className="border-primary-200 bg-gradient-to-br from-primary-50 to-white">
-        <CardContent className="pt-6">
-          <div className="flex items-start gap-4">
-            <BookOpen className="w-10 h-10 text-primary-500 flex-shrink-0" />
-            <div>
-              <h3 className="font-medium mb-2">Content library coming in Phase 2</h3>
-              <p className="text-sm text-gray-600">
-                We're curating high-quality, science-backed articles on longevity biomarkers, lifestyle interventions,
-                and cutting-edge research. This preview shows what you can expect!
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Phase 2 notice */}
+      <div className="flex items-start gap-4 p-5 rounded-xl bg-gray-50/80 border border-gray-100 animate-fade-in" style={{ animationDelay: '400ms' }}>
+        <div className="w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0">
+          <BookOpen className="w-4.5 h-4.5 text-indigo-600" />
+        </div>
+        <div>
+          <p className="text-sm font-medium text-gray-900 mb-1">Full library coming in Phase 2</p>
+          <p className="text-sm text-gray-500 leading-relaxed">
+            We&apos;re curating science-backed articles on longevity, biomarkers, and lifestyle interventions.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
