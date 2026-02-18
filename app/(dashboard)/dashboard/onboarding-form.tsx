@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Target, ArrowRight, Activity, Heart, TrendingUp } from 'lucide-react'
+import { Target, ArrowRight, Activity, Heart, TrendingUp, Sparkles, Shield } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function OnboardingForm() {
@@ -36,7 +36,6 @@ export default function OnboardingForm() {
         throw new Error('User not authenticated')
       }
 
-      // Update user profile with onboarding data
       const { error } = await supabase
         .from('profiles')
         .update({
@@ -50,7 +49,6 @@ export default function OnboardingForm() {
 
       if (error) throw error
 
-      // Refresh the page to show the returning user dashboard
       router.refresh()
     } catch (error) {
       console.error('Error completing onboarding:', error)
@@ -63,176 +61,179 @@ export default function OnboardingForm() {
   const isFormValid = formData.ageRange && formData.primaryGoal
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl space-y-8">
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Welcome to Wellspring</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Let's personalize your longevity journey. Tell us about yourself to get tailored recommendations.
+    <div className="max-w-3xl mx-auto space-y-8">
+      {/* Hero welcome */}
+      <div className="text-center space-y-3 animate-fade-in">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-sm font-medium mb-2">
+          <Sparkles className="w-3.5 h-3.5" />
+          Welcome to your health journey
+        </div>
+        <h1 className="text-4xl font-bold text-gray-900">
+          Let&apos;s get started
+        </h1>
+        <p className="text-lg text-gray-500 max-w-xl mx-auto">
+          Tell us about yourself so we can personalize your longevity recommendations.
         </p>
       </div>
 
-      <Card className="border-primary-200 dark:border-primary-800">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Target className="w-5 h-5 text-primary-500" />
-            Complete Your Profile
-          </CardTitle>
-          <CardDescription>Help us understand your health goals and current situation</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Step 1: Basic Info */}
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-500 text-white font-bold flex-shrink-0">
+      {/* Onboarding Card */}
+      <Card className="border-gray-100 shadow-sm animate-slide-up" style={{ animationDelay: '100ms' }}>
+        <CardContent className="p-8 space-y-8">
+          {/* Step 1 */}
+          <div className="space-y-5">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary-500 text-white text-sm font-semibold">
                 1
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-2">Tell us about yourself</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Age range
-                    </label>
-                    <select
-                      value={formData.ageRange}
-                      onChange={(e) => setFormData({ ...formData, ageRange: e.target.value })}
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                    >
-                      <option value="">Select age range</option>
-                      <option value="25-34">25-34</option>
-                      <option value="35-44">35-44</option>
-                      <option value="45-54">45-54</option>
-                      <option value="55-64">55-64</option>
-                      <option value="65+">65+</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Primary goal
-                    </label>
-                    <select
-                      value={formData.primaryGoal}
-                      onChange={(e) => setFormData({ ...formData, primaryGoal: e.target.value })}
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                    >
-                      <option value="">Select your goal</option>
-                      <option value="optimize">Optimize overall health</option>
-                      <option value="prevent">Prevent disease</option>
-                      <option value="performance">Improve athletic performance</option>
-                      <option value="longevity">Longevity & anti-aging</option>
-                      <option value="manage">Manage existing condition</option>
-                    </select>
-                  </div>
-                </div>
+              <h3 className="font-semibold text-gray-900">About you</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-10">
+              <div className="space-y-1.5">
+                <label className="block text-sm font-medium text-gray-700">
+                  Age range
+                </label>
+                <select
+                  value={formData.ageRange}
+                  onChange={(e) => setFormData({ ...formData, ageRange: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                >
+                  <option value="">Select age range</option>
+                  <option value="25-34">25-34</option>
+                  <option value="35-44">35-44</option>
+                  <option value="45-54">45-54</option>
+                  <option value="55-64">55-64</option>
+                  <option value="65+">65+</option>
+                </select>
+              </div>
+              <div className="space-y-1.5">
+                <label className="block text-sm font-medium text-gray-700">
+                  Primary goal
+                </label>
+                <select
+                  value={formData.primaryGoal}
+                  onChange={(e) => setFormData({ ...formData, primaryGoal: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                >
+                  <option value="">Select your goal</option>
+                  <option value="optimize">Optimize overall health</option>
+                  <option value="prevent">Prevent disease</option>
+                  <option value="performance">Improve athletic performance</option>
+                  <option value="longevity">Longevity &amp; anti-aging</option>
+                  <option value="manage">Manage existing condition</option>
+                </select>
               </div>
             </div>
           </div>
 
-          {/* Step 2: Health Focus */}
-          <div className="space-y-4 pt-4 border-t dark:border-gray-700">
-            <div className="flex items-start gap-4">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-white font-bold flex-shrink-0">
+          {/* Divider */}
+          <div className="border-t border-gray-100" />
+
+          {/* Step 2 */}
+          <div className="space-y-5">
+            <div className="flex items-center gap-3">
+              <div className={`flex items-center justify-center w-7 h-7 rounded-full text-sm font-semibold ${formData.ageRange && formData.primaryGoal ? 'bg-primary-500 text-white' : 'bg-gray-200 text-gray-600'}`}>
                 2
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-2">What areas do you want to improve?</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Select all that apply</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    { id: 'metabolic', icon: Activity, label: 'Metabolic Health', desc: 'Blood sugar & insulin' },
-                    { id: 'cardiovascular', icon: Heart, label: 'Cardiovascular', desc: 'Heart & circulation' },
-                    { id: 'energy', icon: TrendingUp, label: 'Energy & Performance', desc: 'Vitality & fitness' },
-                    { id: 'body', icon: Target, label: 'Body Composition', desc: 'Weight & muscle' },
-                  ].map((area) => (
-                    <label
-                      key={area.id}
-                      className="flex items-start gap-3 p-4 border rounded-lg hover:border-primary-500 dark:border-gray-700 dark:hover:border-primary-500 transition-colors cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        className="mt-1"
-                        checked={formData.healthFocus.includes(area.id)}
-                        onChange={() => handleCheckbox('healthFocus', area.id)}
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <area.icon className="w-4 h-4 text-primary-500" />
-                          <span className="font-medium">{area.label}</span>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">{area.desc}</p>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              <h3 className="font-semibold text-gray-900">Health focus areas</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-10">
+              {[
+                { id: 'metabolic', icon: Activity, label: 'Metabolic Health', desc: 'Blood sugar & insulin' },
+                { id: 'cardiovascular', icon: Heart, label: 'Cardiovascular', desc: 'Heart & circulation' },
+                { id: 'energy', icon: TrendingUp, label: 'Energy & Performance', desc: 'Vitality & fitness' },
+                { id: 'body', icon: Target, label: 'Body Composition', desc: 'Weight & muscle' },
+              ].map((area) => {
+                const isSelected = formData.healthFocus.includes(area.id)
+                return (
+                  <label
+                    key={area.id}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-200 cursor-pointer group ${
+                      isSelected
+                        ? 'border-primary-300 bg-primary-50/50'
+                        : 'border-gray-100 hover:border-primary-200 hover:bg-primary-50/30'
+                    }`}
+                  >
+                    <div className={`flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${
+                      isSelected ? 'bg-primary-100' : 'bg-gray-50 group-hover:bg-primary-50'
+                    }`}>
+                      <area.icon className={`w-4 h-4 transition-colors ${
+                        isSelected ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-500'
+                      }`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-sm font-medium text-gray-900 block">{area.label}</span>
+                      <span className="text-xs text-gray-500">{area.desc}</span>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleCheckbox('healthFocus', area.id)}
+                      className="w-4 h-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500"
+                    />
+                  </label>
+                )
+              })}
             </div>
           </div>
 
-          {/* Step 3: Current Status */}
-          <div className="space-y-4 pt-4 border-t dark:border-gray-700">
-            <div className="flex items-start gap-4">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-white font-bold flex-shrink-0">
+          {/* Divider */}
+          <div className="border-t border-gray-100" />
+
+          {/* Step 3 */}
+          <div className="space-y-5">
+            <div className="flex items-center gap-3">
+              <div className={`flex items-center justify-center w-7 h-7 rounded-full text-sm font-semibold ${formData.healthFocus.length > 0 ? 'bg-primary-500 text-white' : 'bg-gray-200 text-gray-600'}`}>
                 3
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-2">Track your current habits</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  We'll use this to provide personalized recommendations
-                </p>
-                <div className="space-y-3">
-                  {[
-                    { id: 'exercise', label: 'Exercise regularly (3+ times per week)' },
-                    { id: 'diet', label: 'Follow a specific diet plan' },
-                    { id: 'supplements', label: 'Take supplements or medications' },
-                    { id: 'sleep', label: 'Track sleep and recovery' },
-                    { id: 'bloodtests', label: 'Have recent blood test results' },
-                  ].map((habit) => (
-                    <label
-                      key={habit.id}
-                      className="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 dark:border-gray-700 cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={formData.currentHabits.includes(habit.id)}
-                        onChange={() => handleCheckbox('currentHabits', habit.id)}
-                      />
-                      <span className="text-sm">{habit.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              <h3 className="font-semibold text-gray-900">Current habits</h3>
+            </div>
+            <div className="space-y-2 pl-10">
+              {[
+                { id: 'exercise', label: 'Exercise regularly (3+ times per week)' },
+                { id: 'diet', label: 'Follow a specific diet plan' },
+                { id: 'supplements', label: 'Take supplements or medications' },
+                { id: 'sleep', label: 'Track sleep and recovery' },
+                { id: 'bloodtests', label: 'Have recent blood test results' },
+              ].map((habit) => (
+                <label key={habit.id} className="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={formData.currentHabits.includes(habit.id)}
+                    onChange={() => handleCheckbox('currentHabits', habit.id)}
+                    className="w-4 h-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500"
+                  />
+                  <span className="text-sm text-gray-700">{habit.label}</span>
+                </label>
+              ))}
             </div>
           </div>
 
-          <div className="pt-6">
+          {/* Submit */}
+          <div className="pt-2">
             <Button
-              className="w-full"
+              className="w-full h-12 text-base font-medium"
               size="lg"
               onClick={handleSubmit}
               disabled={loading || !isFormValid}
             >
-              {loading ? 'Setting up...' : 'Complete Setup & Get My Recommendations'}
+              {loading ? 'Setting up...' : 'Get My Recommendations'}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Why This Matters */}
-      <Card className="bg-gradient-to-br from-primary-50 to-white dark:from-primary-950 dark:to-gray-900 border-primary-200 dark:border-primary-800">
-        <CardContent className="pt-6">
-          <div className="flex items-start gap-4">
-            <Target className="w-10 h-10 text-primary-500 flex-shrink-0" />
-            <div>
-              <h3 className="font-semibold mb-2">Why we ask these questions</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Wellspring uses your profile to provide personalized content, biomarker recommendations, and
-                actionable insights tailored to your specific goals and situation. Your data stays private and secure.
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Trust card */}
+      <div className="flex items-start gap-4 p-5 rounded-xl bg-gray-50/80 border border-gray-100 animate-fade-in" style={{ animationDelay: '200ms' }}>
+        <Shield className="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="text-sm font-medium text-gray-900 mb-1">Your data stays private</p>
+          <p className="text-sm text-gray-500 leading-relaxed">
+            We use your profile to personalize recommendations and insights.
+            Your health data is encrypted and never shared with third parties.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
