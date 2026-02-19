@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,58 +6,69 @@
 
 @layer base {
   :root {
-    --primary: 203 89% 53%;
-    --secondary: 18 23% 66%;
-    --success: 142 71% 45%;
-    --warning: 38 92% 50%;
-    --error: 4 90% 58%;
-
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Wellspring — Nordic Clinical Warmth */
+    --background: 36 33% 98%;
+    --foreground: 0 0% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary-foreground: 210 40% 98%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 203 89% 53%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 153 41% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 28 45% 64%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 36 20% 93%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 36 20% 93%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 14 66% 61%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 36 16% 88%;
+    --input: 36 16% 88%;
+    --ring: 153 41% 30%;
     --radius: 0.75rem;
-    --chart-1: 203 89% 53%;
-    --chart-2: 142 71% 45%;
-    --chart-3: 38 92% 50%;
-    --chart-4: 18 23% 66%;
-    --chart-5: 4 90% 58%;
+    --chart-1: 153 41% 30%;
+    --chart-2: 28 45% 64%;
+    --chart-3: 14 66% 61%;
+    --chart-4: 153 34% 42%;
+    --chart-5: 0 0% 32%;
   }
 }
 
 @layer base {
   * {
-    @apply border-gray-200;
+    border-color: hsl(var(--border));
   }
 
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-feature-settings: 'cv11', 'ss01';
+    font-family: 'DM Sans', system-ui, sans-serif;
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.025em;
+    font-family: 'Outfit', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    color: #1A1A1A;
   }
 
-  /* Fix dark select/input backgrounds globally */
+  /* Noise texture overlay for tactile depth */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Form inputs — warm, never dark */
   select,
   input[type="text"],
   input[type="email"],
@@ -65,27 +76,64 @@
   input[type="number"],
   input[type="date"],
   textarea {
-    background-color: hsl(var(--background)) !important;
-    color: hsl(var(--foreground)) !important;
-    border: 1px solid hsl(var(--border));
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #FFFFFF !important;
+    color: #1A1A1A !important;
+    border: 1px solid #EBE4DA;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    border-radius: 0.75rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  select:focus,
+  input:focus,
+  textarea:focus {
+    border-color: #2D6A4F !important;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1) !important;
+    outline: none;
   }
 
   select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
-    background-position: right 0.5rem center !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23737373' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+    background-position: right 0.6rem center !important;
     background-repeat: no-repeat !important;
-    background-size: 1.5em 1.5em !important;
+    background-size: 1.25em 1.25em !important;
     padding-right: 2.5rem;
   }
 
-  /* Checkbox styling */
   input[type="checkbox"] {
-    accent-color: hsl(var(--primary));
-    width: 1rem;
-    height: 1rem;
+    accent-color: #2D6A4F;
+    width: 1.05rem;
+    height: 1.05rem;
     border-radius: 0.25rem;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .card-elevated {
+    background: #FFFFFF;
+    border: 1px solid rgba(235, 228, 218, 0.6);
+    box-shadow:
+      0 1px 2px rgba(26, 26, 26, 0.04),
+      0 4px 12px rgba(26, 26, 26, 0.03);
+    border-radius: 1rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-elevated:hover {
+    box-shadow:
+      0 2px 4px rgba(26, 26, 26, 0.04),
+      0 8px 24px rgba(26, 26, 26, 0.06);
+    transform: translateY(-1px);
+  }
+
+  .blob-accent {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.08;
+    pointer-events: none;
   }
 }
 
@@ -95,9 +143,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
     .animate-fade-in,
     .animate-scale-in,
-    .animate-slide-up {
+    .animate-slide-up,
+    .animate-draw-line {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
