@@ -142,6 +142,26 @@
     text-wrap: balance;
   }
 
+  /* Animation initial states — prevent flicker by starting hidden */
+  .animate-fade-up,
+  .animate-slide-up {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+  }
+
+  .animate-scale-in {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  .animate-draw-line {
+    width: 0%;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-up,
     .animate-fade-in,
@@ -151,6 +171,7 @@
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
+      width: auto !important;
     }
   }
 }

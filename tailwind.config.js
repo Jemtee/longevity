@@ -101,6 +101,10 @@ module.exports = {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
@@ -110,6 +114,7 @@ module.exports = {
         'draw-line': 'draw-line 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
         'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite',
         'shimmer': 'shimmer 2s ease-in-out infinite',
+        'spin-slow': 'spin-slow 3s linear infinite',
       },
     },
   },
