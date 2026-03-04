@@ -1,0 +1,11 @@
+Model Information:
+* title:	3D human body wireframe model
+* source:	https://sketchfab.com/3d-models/3d-human-body-wireframe-model-66f684f022fb47ef9e22eaae406b231e
+* author:	Syed Mohammad Hasan (https://sketchfab.com/HasanXRFX)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "3D human body wireframe model" (https://sketchfab.com/3d-models/3d-human-body-wireframe-model-66f684f022fb47ef9e22eaae406b231e) by Syed Mohammad Hasan (https://sketchfab.com/HasanXRFX) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

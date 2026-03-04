@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
-import { LayoutDashboard, Droplet, Lightbulb, Target, BookOpen, LogOut, Menu, X, Leaf } from 'lucide-react'
+import { LayoutDashboard, Droplet, Lightbulb, Target, BookOpen, LogOut, Menu, X, Leaf, Map } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 
 interface DashboardNavProps {
@@ -29,9 +29,9 @@ export default function DashboardNav({ user }: DashboardNavProps) {
   const navItems = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { name: 'Biomarkers', href: '/dashboard/biomarkers', icon: Droplet },
+    { name: 'Roadmap', href: '/dashboard/roadmap', icon: Map },
     { name: 'Insights', href: '/dashboard/insights', icon: Lightbulb },
     { name: 'Goals', href: '/dashboard/goals', icon: Target },
-    { name: 'Content', href: '/dashboard/content', icon: BookOpen },
   ]
 
   return (

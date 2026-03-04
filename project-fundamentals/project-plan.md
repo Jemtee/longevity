@@ -326,6 +326,13 @@
 - [ ] Community features (forums, discussions)
 - [ ] Advanced analytics dashboard
 - [ ] Partnerships with other labs
+- [ ] **3D Body Layer System** — Interactive body visualization with switchable anatomical layers:
+  - Layers: Organs, Nervous System, Muscular, Skeletal, Circulatory, Lymphatic, Skin/Default
+  - Each layer links to relevant biomarker categories (e.g., Skeletal → calcium, vitamin D, bone density)
+  - Sidebar layer selector + click-to-cycle interaction on body
+  - Smooth transitions between layers with fade/morph animations
+  - Layer-specific organ hotspots and tooltips
+  - Premium feature: Full anatomical detail views
 
 ### Long-term (6-12 months)
 - [ ] International expansion (US, UK markets)

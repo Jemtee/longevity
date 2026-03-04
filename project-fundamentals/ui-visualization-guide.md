@@ -1208,4 +1208,153 @@ Keep Tailwind CSS transitions for simple hover/focus states. Use framer-motion o
 
 ---
 
-*Last updated: 2026-02-16*
+## 18. 3D Body Layer System (Future Feature)
+
+An interactive anatomical visualization where users can explore different body systems, each connected to relevant biomarkers.
+
+### 18.1 Available Layers
+
+| Layer | Visual Style | Primary Color | Connected Biomarker Categories |
+|-------|-------------|---------------|-------------------------------|
+| **Default/Skin** | Wireframe hologram body | Cyan `#00d4ff` | All categories overview |
+| **Organs** | Solid organs rendered inside wireframe | Mixed organ colors | Metabolic, Kidney & Liver, Gut Health |
+| **Skeletal** | Bone structure, joints highlighted | White/cream `#f0f0e8` | Calcium, Vitamin D, Phosphorus, Bone density |
+| **Muscular** | Muscle groups, fiber direction | Red/maroon `#8b0000` | Testosterone, Creatinine, Protein markers |
+| **Circulatory** | Heart, arteries, veins network | Red/blue vessels | Cardiovascular (LDL, HDL, ApoB, Lp(a)), hs-CRP |
+| **Nervous** | Brain, spinal cord, nerve branches | Yellow/gold `#ffd700` | B12, Homocysteine, Cortisol, HRV |
+| **Lymphatic** | Lymph nodes, vessels | Green `#90ee90` | Immune markers, sIgA, White blood cells |
+
+### 18.2 Layer-Biomarker Mapping Detail
+
+```
+Organs Layer:
+  Brain      → B12, Homocysteine, Cortisol
+  Thyroid    → TSH, T3, T4
+  Heart      → ApoB, Lp(a), hs-CRP, Triglycerides
+  Lungs      → VO2max, Ferritin (oxygen transport)
+  Liver      → ALT, AST, GGT, Albumin
+  Pancreas   → HbA1c, Fasting Glucose, Fasting Insulin
+  Kidneys    → Creatinine, eGFR, Cystatin C
+  Gut        → Calprotectin, Microbiome diversity, Zonulin
+
+Skeletal Layer:
+  Spine      → Vitamin D, Calcium
+  Joints     → hs-CRP (inflammation), Vitamin D
+  Bones      → Calcium, Phosphorus, Vitamin D, Bone density markers
+
+Circulatory Layer:
+  Heart      → All cardiovascular markers
+  Arteries   → ApoB, LDL, Lp(a), Homocysteine
+  Blood      → Ferritin, Hemoglobin, Iron, B12
+
+Nervous Layer:
+  Brain      → B12, Omega-3 Index, Homocysteine
+  Nerves     → B vitamins, Magnesium
+  Stress     → Cortisol, HRV
+```
+
+### 18.3 Interaction Patterns
+
+**Sidebar Layer Selector:**
+```
+┌─ Body Layers ───────────────────┐
+│                                  │
+│  ○ Overview (Default)            │
+│  ◉ Organs                   ←    │
+│  ○ Skeletal                      │
+│  ○ Muscular                      │
+│  ○ Circulatory                   │
+│  ○ Nervous                       │
+│  ○ Lymphatic                     │
+│                                  │
+│  ─────────────────────────────   │
+│  🔒 Full Anatomical (Premium)    │
+│                                  │
+└──────────────────────────────────┘
+```
+
+**Click-to-Cycle on Body:**
+- Single click on body → Cycle to next layer
+- Click on specific region → Select that organ/area
+- Double-click → Reset to default view
+
+**Layer Transition Animation:**
+- Crossfade between layers (300ms)
+- Current layer fades out while new layer fades in
+- Particles flow during transition for continuity
+- Optional: Morph animation where vertices shift positions
+
+### 18.4 Layer-Specific Hotspots
+
+Each layer shows only relevant hotspots:
+
+```
+Organs Layer Hotspots:
+  [Brain] [Thyroid] [Heart] [Lungs] [Liver] [Pancreas] [Kidneys] [Gut]
+
+Skeletal Layer Hotspots:
+  [Skull] [Spine] [Ribcage] [Pelvis] [Joints]
+
+Circulatory Layer Hotspots:
+  [Heart] [Carotid] [Aorta] [Coronary] [Femoral]
+
+Nervous Layer Hotspots:
+  [Brain] [Brainstem] [Spinal Cord] [Peripheral Nerves]
+```
+
+### 18.5 Technical Implementation Notes
+
+**3D Models Required:**
+- Option A: Parametric generation (current approach, extended per layer)
+- Option B: Load GLTF models for each system (higher quality, larger bundle)
+- Option C: Hybrid — wireframe base + GLTF organs overlay
+
+**State Management:**
+```typescript
+interface BodyViewerState {
+  currentLayer: 'default' | 'organs' | 'skeletal' | 'muscular' | 'circulatory' | 'nervous' | 'lymphatic'
+  selectedRegion: string | null
+  hoveredRegion: string | null
+  transitionProgress: number // 0-1 for animation
+  isPremium: boolean
+}
+```
+
+**Performance Considerations:**
+- Lazy-load layer geometries on first selection
+- Use instanced meshes for repeated structures (bones, vessels)
+- LOD (Level of Detail) for complex layers on mobile
+- Preload next likely layer based on user behavior
+
+### 18.6 Connected Biomarker Panel
+
+When a layer is active, the biomarker detail panel filters to show only relevant markers:
+
+```
+┌─ Circulatory System ────────────────────────┐
+│                                              │
+│  Your cardiovascular biomarkers              │
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │ ApoB          92 mg/dL    🟢 Optimal │   │
+│  │ ████████████░░░░░░░░░░░             │   │
+│  └──────────────────────────────────────┘   │
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │ LDL-C         118 mg/dL   🟡 Border  │   │
+│  │ ██████████████░░░░░░░░░             │   │
+│  └──────────────────────────────────────┘   │
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │ Lp(a)         45 nmol/L   🟢 Optimal │   │
+│  │ ████████░░░░░░░░░░░░░░░             │   │
+│  └──────────────────────────────────────┘   │
+│                                              │
+│  [ View All Cardiovascular Markers → ]       │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+---
+
+*Last updated: 2026-02-25*

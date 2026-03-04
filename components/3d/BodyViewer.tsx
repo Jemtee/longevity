@@ -107,7 +107,7 @@ export function BodyViewer({
 
         {/* Instructions overlay (shows briefly) */}
         <div className="absolute left-4 top-4 pointer-events-none">
-          <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-900/60 px-3 py-1.5 rounded-lg backdrop-blur-sm">
+          <div className="flex items-center gap-2 text-xs text-cyan-300/80 bg-black/60 px-3 py-1.5 rounded-lg backdrop-blur-sm border border-cyan-500/20">
             <Tag className="w-3 h-3" />
             <span>Drag to rotate • Click regions to explore</span>
           </div>
